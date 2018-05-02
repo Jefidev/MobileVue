@@ -23,7 +23,7 @@
                     <h5>Support</h5>
                     <ul>
                         <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help desk</a></li>
+                        <li><a href="#"><router-link to="/doc">API doc</router-link></a></li>
                         <li><a href="#">Forums</a></li>
                     </ul>
                 </div>
