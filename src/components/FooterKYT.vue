@@ -14,7 +14,7 @@
                 <div class="col-sm-3">
                     <h5>About us</h5>
                     <ul>
-                        <li><a href="#">Company Information</a></li>
+                        <li><a href="#">Project Information</a></li>
                         <li><a href="#">Contact us</a></li>
                         <li><a href="#">Reviews</a></li>
                     </ul>
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="footer-copyright" >
-            <p>© 2018 Copyright Text</p>
+            <p>© 2018 KYT Copyright</p>
         </div>
     </footer>
 </template>

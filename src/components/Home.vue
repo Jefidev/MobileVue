@@ -5,19 +5,19 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Title</h4>
-                            <h6 class="text-muted card-subtitle mb-2">Subtitle</h6>
-                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><a class="card-link" href="#">Link</a><a class="card-link"
-                                href="#">Link</a></div>
+                            <h4 class="card-title">The KYT game</h4>
+                            <h6 class="text-muted card-subtitle mb-2">Have fun exploring the town</h6>
+                            <p class="card-text">Through a series of achievements, you'll be exploring and discovering the best spots in town. Combining the fun and exploration, KYT takes you to places you’d never know to visit.</p>
+                            <a class="card-link" href="#">Unlock the adventure!</a><a class="card-link" href="#">Tell me more</a></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Title</h4>
-                            <h6 class="text-muted card-subtitle mb-2">Subtitle</h6>
-                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><a class="card-link" href="#">Link</a><a class="card-link"
-                                href="#">Link</a></div>
+                            <h4 class="card-title">Social hub</h4>
+                            <h6 class="text-muted card-subtitle mb-2">Share the fun</h6>
+                            <p class="card-text">Had fun somewhere in town ? Tell us about it by sharing a tweet on the social hub. Wanna know what's up in your neighbourhood ? Go check it out, it's all free.</p>
+                            <a class="card-link" href="#">Let's do it !</a><a class="card-link" href="#">Tell me more</a></div>
                     </div>
                 </div>
             </div>
