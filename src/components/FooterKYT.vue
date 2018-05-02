@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
+        <div class="footer-copyright" >
             <p>© 2018 Copyright Text</p>
         </div>
     </footer>
