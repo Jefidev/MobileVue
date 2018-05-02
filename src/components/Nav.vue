@@ -1,7 +1,11 @@
 <template>
   <nav class="navbar navbar-light navbar-expand-lg static-top bg-white clean-navbar">
         <div class="container">
-          <router-link class="navbar-brand logo" to="/"><a href="#" class="navbar-brand" ><img src="/src/assets/logo.png"></a>Know Your Town</router-link>
+          <router-link class="navbar-brand logo" to="/">
+            <a href="#" class="navbar-brand logo" >
+              <img class="" src="../assets/KYT_CIRCLE.png" width="40" height="40">
+            </a>Know Your Town
+          </router-link>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                 id="navcol-1">
