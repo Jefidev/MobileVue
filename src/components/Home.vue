@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div id="quartier">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -15,6 +15,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Social hub</h4>
+
                             <h6 class="text-muted card-subtitle mb-2">Share the fun</h6>
                             <p class="card-text">Had fun somewhere in town ? Tell us about it by sharing a tweet on the social hub. Wanna know what's up in your neighbourhood ? Go check it out, it's all free.</p>
                             <a class="card-link" href="#">Let's do it !</a><a class="card-link" href="#">Tell me more</a></div>
@@ -25,11 +26,8 @@
             <div class="row">
               <div class="col-md-12">
                 <h3 class="h3 text-center">What's new in</h3>
-                <select class="form-control"><!-- A remplacer par la liste dynamique -->
-                  <option>Bouge</option>
-                  <option>Flawinne</option>
-                  <option>Jambes</option>
-                  <option>Saint-servais</option>
+                <select class="form-control" v-model="itemSelected"><!-- A remplacer par la liste dynamique -->
+                   <option  v-for="item in dynamiqueList" v-bind:value="item">{{item.name}}</option>
                 </select>
               </div>
             </div>
@@ -37,10 +35,11 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="btn-group col-md-12" role="group" aria-label="..."><!-- A remplacer par les vraies valeurs selon le quartier -->
-                  <button type="button" class="col-md-3 btn btn-warning">Temperature : 25°C</button>
-                  <button type="button" class="col-md-3 btn btn-dark">Humidity : 30%</button>
-                  <button type="button" class="col-md-3 btn btn-success">Air quality : Good</button>
-                  <button type="button" class="col-md-3 btn btn-default">Luminosity : 250 Lux</button>
+
+                  <button type="button" class="col-md-3 btn btn-warning">Temperature : {{itemSelected.sensorsData.temp}}°C</button>
+                  <button type="button" class="col-md-3 btn btn-dark">Humidity : {{itemSelected.sensorsData.humid}}%</button>
+                  <button type="button" class="col-md-3 btn btn-success">Air quality : {{itemSelected.sensorsData.gaz}}</button>
+                  <button type="button" class="col-md-3 btn btn-default">Luminosity : {{itemSelected.sensorsData.light}} Lux</button>
                 </div>
               </div>
             </div>
@@ -113,8 +112,98 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   //Ajouter un dropdown qui permettra de récupérer les quartiers et de sélectionner le quartier souhaité
+  name:'quartier',
+  data() {
+    return {
+      dynamiqueList: [],
+      itemSelected:{},
+      tweets:[]
+    }
+  },
+  methods:{
+    changeSensors : function (sensors) {
+      var vm = this
+      axios.get('http://groupe2.cslabs.be/open/neighbourhoods/#'+vm.itemSelected, {crossdomain:true}).then(function (response2) {
+        response2.data.forEach(function (item2) {
+          if(item2.name == vm.itemSelected){
+            console.log('je suis là')
+            var quartier = item2
+            quartier.sensors.forEach(function(item) {
+              console.log(item)
+              switch (item.sType) {
+                case 1:
+                  sensors.temp = item.value;
+                  break;
+                case 2:
+                  sensors.light = item.value;
+                  break;
+                case 5:
+                  if (item.value < 800) {
+                    sensors.gaz = 'Good'
+                  } else {
+                    if (item.value > 1200) {
+                      sensors.gaz = 'Bad'
+                    } else {
+                      sensors.gaz = 'Middle'
+                    }
+                  }
+                  ;
+                  break;
+                case 6:
+                  sensors.humid = item.value;
+                  break;
+              }
+            })
+          }
+        })
+        })
+      }
+    },
+  created: function(){
+    var vm = this;
+    axios.get('http://groupe2.cslabs.be/open/neighbourhoods/names', {crossdomain:true}).then(function (response) {
+      response.data.list.forEach(function (item) {
+        vm.dynamiqueList.push({name:item})
+      })
+
+
+    })
+
+    axios.get('http://groupe2.cslabs.be/open/neighbourhoods/#'+vm.itemSelected, {crossdomain:true}).then(function (response2) {
+      for(var i = 0; i<response2.data.length; i++) {
+        vm.dynamiqueList[i].sensorsData = {}
+        response2.data[i].sensors.forEach(function (item) {
+          switch (item.sType) {
+            case 1:
+              vm.dynamiqueList[i].sensorsData.temp = item.value;
+              break;
+            case 2:
+              vm.dynamiqueList[i].sensorsData.light = item.value;
+              break;
+            case 5:
+              if (item.value < 800) {
+                vm.dynamiqueList[i].sensorsData.gaz = 'Good'
+              } else {
+                if (item.value > 1200) {
+                  vm.dynamiqueList[i].sensorsData.gaz = 'Bad'
+                } else {
+                  vm.dynamiqueList[i].sensorsData.gaz = 'Middle'
+                }
+              }
+              ;
+              break;
+            case 6:
+              vm.dynamiqueList[i].sensorsData.humid = item.value;
+              break;
+          }
+        })
+      }
+      vm.itemSelected = vm.dynamiqueList[0];
+    })
+  }
 }
 </script>
 
